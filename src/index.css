@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.category {
+  border: 1px solid;
+  max-width: 150px;
+}
+
+.category h2 {
+
+}
