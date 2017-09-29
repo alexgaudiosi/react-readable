@@ -8,11 +8,12 @@ class App extends Component {
 
   state = {
     categories: [],
-    posts: []
+    posts: [],
+    comments: []
   }
 
   componentDidMount() {
-    ReadableAPI.getAll().then((categories) => {
+    ReadableAPI.getCategories().then((categories) => {
       this.setState({ categories: categories.categories });
     })
 
@@ -22,29 +23,28 @@ class App extends Component {
   }
 
   render() {
+
     const { categories, posts } = this.state;
-
-
-    console.log(categories)
-    console.log(posts)
 
     return (
       <div className="App">
-        { categories.map((category) => (
-          <ListCategories
-            key={category.name}
-            category={category}
-          />
-        ))}
-        <div className="posts">
-          { posts.map((post) => (
-            <Post
-              key={post.id}
-              post={post}
+        <div className="wrapper">
+          { categories.map((category) => (
+            <ListCategories
+              key={category.name}
+              category={category}
             />
           ))}
+          <div className="posts">
+            { posts.map((post) => (
+              <Post
+                key={post.id}
+                post={post}
+              />
+            ))}
+          </div>
+          <button>Add new post</button>
         </div>
-
       </div>
     );
   }

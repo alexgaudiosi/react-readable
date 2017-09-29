@@ -8,7 +8,7 @@ class ListCategories extends Component {
 
     return (
       <div className='category'>
-        <h2>{ category.name }</h2>
+        <h5>{ category.name }</h5>
       </div>
     )
   }
