@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getCategories } from '../actions/index';
+
 
 class ListCategories extends Component {
 
+  // componentWillMount() {
+  //   this.props.getCategoriesThunk(this.props.category);
+  //   console.log(this.props);
+  // }
+
   render() {
+
+
+    console.log(this.props)
 
     const { category } = this.props;
 
@@ -15,4 +27,14 @@ class ListCategories extends Component {
 
 }
 
-export default ListCategories;
+function mapStateToProps({ state }){
+  return {
+    category: state.categories
+  }
+}
+
+function mapDispatchToProps( dispatch ) {
+  return bindActionCreators({ categories: getCategories }, dispatch )
+}
+
+export default connect(mapStateToProps)(ListCategories);
