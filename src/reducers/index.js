@@ -37,19 +37,12 @@ function categories( state = initialCategoriesState, action ) {
   // console.log('spread');
   switch( action.type ) {
     case 'GET_CATEGORIES':
-      console.log(action)
-      console.log('getting state')
       const category = action;
-      console.log(category)
-      return {
-        ...state,
-        [category]: category.categories
-      }
+      return category.categories
     default:
       return state
   }
 }
-
 
 export default combineReducers({
   posts,
