@@ -1,19 +1,12 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import {
-  ADD_POST,
-  GET_CATEGORIES,
-} from '../actions';
+import { ADD_POST, GET_CATEGORIES } from "../actions";
 
-function posts( state = initialPostsState, action ){
-  // console.log('action');
-  // console.log(action);
-  switch( action.type ) {
+function posts(state = initialPostsState, action) {
+  switch (action.type) {
     case ADD_POST:
       const { post } = action;
-      return {
-
-      }
+      return {};
     default:
       return state;
   }
@@ -26,25 +19,23 @@ const initialPostsState = {
     author: null,
     category: null
   }
-}
+};
 
 const initialCategoriesState = {
-  categories: null
-}
+  categories: []
+};
 
-function categories( state = initialCategoriesState, action ) {
-  console.log('spread');
-  // console.log('spread');
-  switch( action.type ) {
-    case 'GET_CATEGORIES':
+function categories(state = initialCategoriesState, action) {
+  switch (action.type) {
+    case GET_CATEGORIES:
       const category = action;
-      return category.categories
+      return category.categories;
     default:
-      return state
+      return state;
   }
 }
 
 export default combineReducers({
-  posts,
+  // posts,
   categories
 });

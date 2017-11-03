@@ -1,40 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getCategories } from '../actions';
-import ListCategories from './ListCategories';
-import Post from './Post';
-import Modal from 'react-modal';
-import { bindActionCreators } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import '../App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import ListCategories from "./ListCategories";
+import { getCategories } from "../actions/index";
+// import Post from './Post';
+// import Modal from 'react-modal';
+// import { bindActionCreators } from 'redux';
+// import ReduxThunk from 'redux-thunk';
+import "../App.css";
 
 class App extends Component {
-
-  state = {
-    postModalOpen: false,
-    categories: [],
-    comments: [],
-    posts: null
-  }
-
-  componentDidMount() {
-    // console.log(actions)
-    // actions.fetchCategories()
-    // console.log('fetch');
-    // fetchCategories()
-  }
-
-
-  // componentDidMount() {
-    // getCategoriesThunk(this.props.categories);
-
-    // componentDidMount() {
-    //   this.props.getCategoriesThunk(this.props.categories)
-    //   console.log(this.props);
-    // }
-  // }
-
-
   // openPostModal = ({ title, body, author }) => {
   //   this.setState(() => ({
   //     postModalOpen: true,
@@ -52,32 +26,34 @@ class App extends Component {
   //   }))
   // }
 
-  render() {
+  componentDidMount() {
+    this.props.getCategories();
+  }
 
-    console.log(this.props)
-    const { findStuff } = this.props;
-    console.log(this.props.findStuff)
-    mapDispatchToProps()
+  render() {
+    const { categories } = this.props;
+    // console.log(this.props.findStuff);
+    mapDispatchToProps();
     return (
       <div className="App">
         <div className="wrapper">
-
           <div className="posts">
             {/* { this.props.categories.map((category) => (
               category.title
             ))} */}
           </div>
-          <button onClick={() => {findStuff()}}>Add new post</button>
+          <ListCategories categories={categories} />
+          <button onClick={() => {}}>Add new post</button>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }){
+function mapStateToProps({ categories }) {
   return {
     categories: categories
-  }
+  };
 }
 
 // function mapDispatchToProps( dispatch ){
@@ -88,15 +64,10 @@ function mapStateToProps({ categories }){
 //   }
 // }
 
-function mapDispatchToProps( dispatch ) {
+function mapDispatchToProps(dispatch) {
   return {
-    findStuff: () => dispatch(getCategories(), console.log('find'))
-
-  }
-  // return bindActionCreators({ fetchCategories: fetchCategories }, dispatch )
+    getCategories: () => dispatch(getCategories())
+  };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

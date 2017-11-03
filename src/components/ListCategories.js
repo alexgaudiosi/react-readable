@@ -1,40 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getCategories } from '../actions/index';
+import React from "react";
 
-
-class ListCategories extends Component {
-
-  // componentWillMount() {
-  //   this.props.getCategoriesThunk(this.props.category);
-  //   console.log(this.props);
-  // }
-
-  render() {
-
-
-    console.log(this.props)
-
-    const { category } = this.props;
-
-    return (
-      <div className='category'>
-        <h5>{ category.name }</h5>
-      </div>
-    )
+export default function ListCategories({ categories }) {
+  if (!categories) {
+    return <div> no data </div>;
   }
 
+  return (
+    <div className="categories">
+      {categories.length > 1 &&
+        categories.map(category => (
+          <div key={category.path} className="category">
+            <h5>{category.name}</h5>
+          </div>
+        ))}
+    </div>
+  );
 }
-
-function mapStateToProps({ state }){
-  return {
-    category: state.categories
-  }
-}
-
-function mapDispatchToProps( dispatch ) {
-  return bindActionCreators({ categories: getCategories }, dispatch )
-}
-
-export default connect(mapStateToProps)(ListCategories);
