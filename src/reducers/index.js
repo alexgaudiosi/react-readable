@@ -2,16 +2,6 @@ import { combineReducers } from "redux";
 
 import { ADD_POST, GET_CATEGORIES, GET_POSTS } from "../actions";
 
-function posts(state = initialPostState, action) {
-  switch (action.type) {
-    case ADD_POST:
-      const { post } = action;
-      return {};
-    default:
-      return state;
-  }
-}
-
 const initialPostState = {
   post: {
     title: null,
@@ -42,8 +32,8 @@ function categories(state = initialCategoriesState, action) {
 function posts(state = initialPostsState, action) {
   switch (action.type) {
     case GET_POSTS:
-      const post = action;
-      return post.posts;
+      const listPosts = action;
+      return listPosts.posts;
     default:
       return state;
   }

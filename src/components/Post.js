@@ -10,6 +10,7 @@ class Post extends Component {
         <p>{post.body}</p>
         <small>
           <p>Author: {post.author}</p>
+          <p>Score: {post.voteScore}</p>
         </small>
       </div>
     );
