@@ -10,7 +10,7 @@ export const fetchCategories = () => {
     .then(data => data.categories);
 };
 
-export const getPosts = () =>
+export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data);

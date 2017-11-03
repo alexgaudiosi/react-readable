@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListCategories from "./ListCategories";
-import { getCategories } from "../actions/index";
+import ListPosts from "./ListPosts";
+import { getCategories, getPosts } from "../actions/index";
 // import Post from './Post';
 // import Modal from 'react-modal';
 // import { bindActionCreators } from 'redux';
@@ -28,31 +29,29 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getCategories();
+    this.props.getPosts();
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, posts } = this.props;
     // console.log(this.props.findStuff);
     mapDispatchToProps();
     return (
       <div className="App">
         <div className="wrapper">
-          <div className="posts">
-            {/* { this.props.categories.map((category) => (
-              category.title
-            ))} */}
-          </div>
+          <div className="posts" />
           <ListCategories categories={categories} />
-          <button onClick={() => {}}>Add new post</button>
+          <ListPosts posts={posts} />
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, posts }) {
   return {
-    categories: categories
+    categories: categories,
+    posts: posts
   };
 }
 
@@ -66,7 +65,8 @@ function mapStateToProps({ categories }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCategories: () => dispatch(getCategories())
+    getCategories: () => dispatch(getCategories()),
+    getPosts: () => dispatch(getPosts())
   };
 }
 
