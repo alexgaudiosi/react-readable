@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListCategories from "./ListCategories";
 import ListPosts from "./ListPosts";
+import NewPost from "./NewPost";
 import { getCategories, getPosts } from "../actions/index";
 // import Post from './Post';
 // import Modal from 'react-modal';
@@ -34,7 +35,6 @@ class App extends Component {
 
   render() {
     const { categories, posts } = this.props;
-    // console.log(this.props.findStuff);
     mapDispatchToProps();
     return (
       <div className="App">
@@ -42,6 +42,7 @@ class App extends Component {
           <div className="posts" />
           <ListCategories categories={categories} />
           <ListPosts posts={posts} />
+          <NewPost categories={categories} />
         </div>
       </div>
     );

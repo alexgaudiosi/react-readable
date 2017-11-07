@@ -1,4 +1,5 @@
 import React from "react";
+import uuid from "uuid";
 
 export default function ListCategories({ categories }) {
   if (!categories) {
@@ -7,9 +8,9 @@ export default function ListCategories({ categories }) {
 
   return (
     <div className="categories">
-      {categories.length > 1 &&
+      {categories.length &&
         categories.map(category => (
-          <div key={category.path} className="category">
+          <div key={uuid.v4()} className="category">
             <h5>{category.name}</h5>
           </div>
         ))}
