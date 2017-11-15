@@ -14,6 +14,12 @@ export function addPost({ title, body, author, category }) {
   };
 }
 
+export const submitPost = values => dispatch => {
+  ReadableAPI.create(values).then(post =>
+    dispatch(console.log("adding"), addPost(post))
+  );
+};
+
 export const receiveCategories = categories => ({
   type: GET_CATEGORIES,
   categories

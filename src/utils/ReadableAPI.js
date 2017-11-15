@@ -4,6 +4,18 @@ const headers = {
   Authorization: "whatever-you-want"
 };
 
+export const create = values => {
+  console.log("create");
+  fetch(`${api}/posts`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(values)
+  }).then(res => res.json());
+};
+
 export const fetchCategories = () => {
   return fetch(`${api}/categories`, { headers })
     .then(res => res.json())
