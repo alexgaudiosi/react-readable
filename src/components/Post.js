@@ -5,14 +5,12 @@ class Post extends Component {
     const { post } = this.props;
 
     return (
-      <div className="post">
+      <div className="post box-shadow">
         <h3>{post.title}</h3>
-        <p>{post.body}</p>
-        <p>{post.category}</p>
-        <small>
-          <p>Author: {post.author}</p>
-          <p>Score: {post.voteScore}</p>
-        </small>
+        <p className="copy">{post.body}</p>
+        <p className="copy">{post.category}</p>
+        <p className="copy--small">Author: {post.author}</p>
+        <p className="copy--small">Score: {post.voteScore}</p>
       </div>
     );
   }

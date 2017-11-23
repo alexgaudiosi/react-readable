@@ -23,7 +23,7 @@ function categories(state = initialCategoriesState, action) {
 function posts(state = initialPostsState, action) {
   switch (action.type) {
     case ADD_POST:
-      return [action.post, ...state];
+      return [...state, action.post];
     case GET_POSTS:
       return [...action.posts];
     default:

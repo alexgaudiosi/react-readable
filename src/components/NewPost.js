@@ -14,13 +14,14 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => (
-  <div>
-    <label>{placeholder}</label>
+  <div className="new-post__field">
     <div>
       <input {...input} placeholder={placeholder} type={type} />
       {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
+        ((error && <span className="new-post__field--error">{error}</span>) ||
+          (warning && (
+            <span className="new-post__field--error">{warning}</span>
+          )))}
     </div>
   </div>
 );
@@ -39,8 +40,8 @@ class NewPost extends Component {
   render() {
     const { categories, pristine, submitting, handleSubmit } = this.props;
     return (
-      <div className="new-post">
-        <form onSubmit={handleSubmit(submit)}>
+      <div className="new-post box-shadow">
+        <form onSubmit={handleSubmit(submit)} className="new-post__form">
           <Field
             name="title"
             type="text"

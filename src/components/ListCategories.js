@@ -7,7 +7,7 @@ export default function ListCategories({ categories }) {
   }
 
   return (
-    <div className="categories">
+    <div className="categories box-shadow">
       {categories.length &&
         categories.map(category => (
           <div key={uuid.v4()} className="category">

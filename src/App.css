@@ -1,8 +1,25 @@
-.new-post-form {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Courier New, Courier, monospace;
 }
 
-.new-post-form__fields {
-  display: block;
+.wrapper {
+  width: 100%;
+  max-width: 1090px;
+  margin: 0 auto;
+}
+
+.copy {
+  font-size: 0.9rem;
+}
+
+.copy--small {
+  font-size: 0.7rem;
+}
+
+.box-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .categories {
@@ -12,28 +29,54 @@
 }
 
 .category {
-  cursor: pointer;
+  display: inline-block;
   margin: 0 10px;
+  padding: 20px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.category h5 {
+  margin: 0;
 }
 
 .posts {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
 }
 
 .post {
+  display: flex;
   flex: 0 1;
-  min-width: 20%;
-  margin: 10px;
+  flex-direction: column;
+  min-width: 19%;
+  margin: 1%;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .new-post {
-  display: inline-block;
-  margin: 20px auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+}
+
+.new-post__form {
+  padding: 40px 0;
+}
+
+.new-post__field {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.new-post__field--error {
+  padding-left: 10px;
+  font-size: 0.7rem;
+  color: red;
 }
