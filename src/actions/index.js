@@ -4,20 +4,15 @@ export const ADD_POST = "ADD_POST";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_POSTS = "GET_POSTS";
 
-export function addPost({ title, body, author, category }) {
+export const addPost = post => {
   return {
     type: ADD_POST,
-    title,
-    body,
-    author,
-    category
+    post
   };
-}
+};
 
 export const submitPost = values => dispatch => {
-  ReadableAPI.create(values).then(post =>
-    dispatch(console.log("adding"), addPost(post))
-  );
+  ReadableAPI.create(values).then(post => dispatch(addPost(post)));
 };
 
 export const receiveCategories = categories => ({
@@ -36,6 +31,6 @@ export const receivePosts = posts => ({
 });
 
 export const getPosts = () => dispatch =>
-  ReadableAPI.fetchPosts(console.log("hey")).then(categories =>
+  ReadableAPI.fetchPosts().then(categories =>
     dispatch(receivePosts(categories))
   );

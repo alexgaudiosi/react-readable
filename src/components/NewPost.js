@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { submitPost } from "../actions";
 import { Field, reduxForm } from "redux-form";
 import uuid from "uuid";
@@ -11,14 +10,14 @@ const maxLength5 = maxLength(5);
 
 const renderField = ({
   input,
-  label,
+  placeholder,
   type,
   meta: { touched, error, warning }
 }) => (
   <div>
-    <label>{label}</label>
+    <label>{placeholder}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={placeholder} type={type} />
       {touched &&
         ((error && <span>{error}</span>) ||
           (warning && <span>{warning}</span>))}
@@ -29,44 +28,18 @@ const renderField = ({
 function submit(values, dispatch) {
   values.id = uuid.v4();
   values.timestamp = Date.now();
-  console.log(values);
   return dispatch(submitPost(values));
 }
 
-// const submit = values => {
-//   //login: ()=> login(values.email)
-//   // this.onSubmit(values);
-//   let x = "cake";
-//   // return dispatch(submitPost(values));
-//   console.log(submitPost);
-//   // submitPost(values);
-//   console.log("submitting form", values);
-// };
-
 class NewPost extends Component {
-  // id - UUID should be fine, but any unique id will work
-  // timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-  // title - String
-  // body - String
-  // author - String
-  // category: A
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log(e);
-  // }
-
   handleSubmit(e, values) {
     e.preventDefault();
-    console.log("submit");
-    console.log(values);
-    // submitPost(values);
   }
 
   render() {
     const { categories, pristine, submitting, handleSubmit } = this.props;
     return (
-      <div>
+      <div className="new-post">
         <form onSubmit={handleSubmit(submit)}>
           <Field
             name="title"
@@ -90,6 +63,7 @@ class NewPost extends Component {
             validate={[required]}
           />
           <Field name="category" component="select" validate={[required]}>
+            <option />
             {categories.length &&
               categories.map(category => (
                 <option key={uuid.v4()}>{category.name}</option>

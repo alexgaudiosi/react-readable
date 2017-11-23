@@ -6,14 +6,16 @@ const headers = {
 
 export const create = values => {
   console.log("create");
-  fetch(`${api}/posts`, {
+  return fetch(`${api}/posts`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(values)
-  }).then(res => res.json());
+  })
+    .then(res => res.json())
+    .then(data => data);
 };
 
 export const fetchCategories = () => {
@@ -31,3 +33,5 @@ export const getComments = id =>
   fetch(`${api}/comments/${id}`, { headers })
     .then(res => res.json())
     .then(data => data);
+
+// export const deleteComment = id

@@ -39,7 +39,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="wrapper">
-          <div className="posts" />
           <ListCategories categories={categories} />
           <ListPosts posts={posts} />
           <NewPost categories={categories} />

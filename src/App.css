@@ -4,3 +4,36 @@
 .new-post-form__fields {
   display: block;
 }
+
+.categories {
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.category {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.posts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.post {
+  flex: 0 1;
+  min-width: 20%;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.new-post {
+  display: inline-block;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
