@@ -14,6 +14,9 @@ export default function ListCategories({ categories }) {
             <h5>{category.name}</h5>
           </div>
         ))}
+      <div className="category">
+        <h5>all</h5>
+      </div>
     </div>
   );
 }

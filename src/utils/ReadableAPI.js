@@ -34,4 +34,12 @@ export const getComments = id =>
     .then(res => res.json())
     .then(data => data);
 
-// export const deleteComment = id
+export const deletePost = post => {
+  const id = post.id;
+  return fetch(`${api}/posts/${id}`, {
+    method: "DELETE",
+    headers
+  })
+    .then(res => res.json())
+    .then(data => data);
+};

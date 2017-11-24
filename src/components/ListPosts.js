@@ -9,7 +9,9 @@ export default function ListPosts({ posts }) {
   return (
     <div className="posts">
       {posts.length > 1 &&
-        posts.map(post => <Post post={post} key={post.id} />)}
+        posts.map(
+          post => (!post.deleted ? <Post post={post} key={post.id} /> : "")
+        )}
     </div>
   );
 }
