@@ -1,7 +1,13 @@
-import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-import { ADD_POST, GET_CATEGORIES, GET_POSTS, DELETE_POST } from "../actions";
+import {
+  ADD_POST,
+  GET_CATEGORIES,
+  GET_POSTS,
+  DELETE_POST,
+  VOTE_POST
+} from '../actions';
 
 const initialCategoriesState = {
   categories: []
@@ -30,6 +36,13 @@ function posts(state = initialPostsState, action) {
       return state.map(
         p =>
           p.id === action.post.id ? { ...p, deleted: action.post.deleted } : p
+      );
+    case VOTE_POST:
+      return state.map(
+        p =>
+          p.id === action.post.id
+            ? { ...p, voteScore: action.post.voteScore }
+            : p
       );
     default:
       return state;

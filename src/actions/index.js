@@ -1,9 +1,10 @@
-import * as ReadableAPI from "../utils/ReadableAPI";
+import * as ReadableAPI from '../utils/ReadableAPI';
 
-export const ADD_POST = "ADD_POST";
-export const GET_CATEGORIES = "GET_CATEGORIES";
-export const GET_POSTS = "GET_POSTS";
-export const DELETE_POST = "DELETE_POST";
+export const ADD_POST = 'ADD_POST',
+  GET_CATEGORIES = 'GET_CATEGORIES',
+  GET_POSTS = 'GET_POSTS',
+  DELETE_POST = 'DELETE_POST',
+  VOTE_POST = 'VOTE_POST';
 
 export const submitPost = values => dispatch => {
   ReadableAPI.create(values).then(post => dispatch(addPost(post)));
@@ -43,4 +44,14 @@ export const removePost = post => dispatch => {
 export const deletePost = post => ({
   type: DELETE_POST,
   post
+});
+
+export const votePostChange = (post, vote) => dispatch => {
+  ReadableAPI.votePost(post, vote).then(post => dispatch(votePost(post)));
+};
+
+export const votePost = (post, vote) => ({
+  type: VOTE_POST,
+  post,
+  vote
 });

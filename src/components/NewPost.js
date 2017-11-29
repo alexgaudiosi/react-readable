@@ -6,7 +6,7 @@ import uuid from "uuid";
 const required = value => (value ? undefined : "Required");
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength5 = maxLength(5);
+const maxLength5 = maxLength(15);
 
 const renderField = ({
   input,
@@ -33,7 +33,7 @@ function submit(values, dispatch) {
 }
 
 class NewPost extends Component {
-  handleSubmit(e, values) {
+  handleSubmit(e) {
     e.preventDefault();
   }
 
@@ -83,14 +83,3 @@ export default reduxForm({
   form: "newPost",
   onSubmit: submitPost
 })(NewPost);
-
-// function mapStateToProps({}) {}
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     submitPost: data => dispatch(addPost(data))
-//   };
-// }
-// export default connect()(NewPost);
-
-// export default connect(mapDispatchToProps)(NewPost);

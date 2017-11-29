@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { removePost } from "../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { removePost, votePostChange } from '../actions';
 
 class Post extends Component {
   render() {
-    const { post, remove } = this.props;
+    const { post, remove, votePost } = this.props;
 
     return (
       <div className="post box-shadow">
@@ -19,7 +19,11 @@ class Post extends Component {
         <p className="copy">{post.body}</p>
         <p className="copy">{post.category}</p>
         <p className="copy--small">Author: {post.author}</p>
-        <p className="copy--small">Score: {post.voteScore}</p>
+        <div className="post__vote">
+          <p className="copy--small">Score: {post.voteScore}</p>
+          <button onClick={() => votePost(post, 'downVote')}>-</button>
+          <button onClick={() => votePost(post, 'upVote')}>+</button>
+        </div>
         <span>{post.deleted}</span>
       </div>
     );
@@ -28,7 +32,8 @@ class Post extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    remove: post => dispatch(removePost(post))
+    remove: post => dispatch(removePost(post)),
+    votePost: (post, vote) => dispatch(votePostChange(post, vote))
   };
 }
 

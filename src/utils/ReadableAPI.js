@@ -1,16 +1,15 @@
-const api = "http://localhost:5001";
+const api = 'http://localhost:5001';
 
 const headers = {
-  Authorization: "whatever-you-want"
+  Authorization: 'whatever-you-want'
 };
 
 export const create = values => {
-  console.log("create");
   return fetch(`${api}/posts`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(values)
   })
@@ -35,10 +34,22 @@ export const getComments = id =>
     .then(data => data);
 
 export const deletePost = post => {
-  const id = post.id;
-  return fetch(`${api}/posts/${id}`, {
-    method: "DELETE",
+  return fetch(`${api}/posts/${post.id}`, {
+    method: 'DELETE',
     headers
+  })
+    .then(res => res.json())
+    .then(data => data);
+};
+
+export const votePost = (post, vote) => {
+  return fetch(`${api}/posts/${post.id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: vote })
   })
     .then(res => res.json())
     .then(data => data);
