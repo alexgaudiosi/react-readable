@@ -6,7 +6,8 @@ import {
   GET_CATEGORIES,
   GET_POSTS,
   DELETE_POST,
-  VOTE_POST
+  VOTE_POST,
+  GET_COMMENTS
 } from '../actions';
 
 const initialCategoriesState = {
@@ -14,7 +15,11 @@ const initialCategoriesState = {
 };
 
 const initialPostsState = {
-  posts: []
+  posts: [
+    {
+      comments: []
+    }
+  ]
 };
 
 function categories(state = initialCategoriesState, action) {
@@ -26,7 +31,7 @@ function categories(state = initialCategoriesState, action) {
   }
 }
 
-function posts(state = initialPostsState, action) {
+function posts(state = initialPostsState, action, comments) {
   switch (action.type) {
     case ADD_POST:
       return [...state, action.post];
@@ -44,6 +49,14 @@ function posts(state = initialPostsState, action) {
             ? { ...p, voteScore: action.post.voteScore }
             : p
       );
+    case GET_COMMENTS:
+      return state.map(
+        post =>
+          post.id === action.comments[0].parentId
+            ? { ...post, comments: action.comments }
+            : post
+      );
+
     default:
       return state;
   }

@@ -28,10 +28,11 @@ export const fetchPosts = () =>
     .then(res => res.json())
     .then(data => data);
 
-export const getComments = id =>
-  fetch(`${api}/comments/${id}`, { headers })
+export const getComments = post => {
+  return fetch(`${api}/posts/${post.id}/comments`, { headers })
     .then(res => res.json())
     .then(data => data);
+};
 
 export const deletePost = post => {
   return fetch(`${api}/posts/${post.id}`, {

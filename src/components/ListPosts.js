@@ -1,16 +1,16 @@
-import React from "react";
-import Post from "./Post";
+import React from 'react';
+import Post from './Post';
 
 export default function ListPosts({ posts }) {
   if (!posts) {
-    return <div> no data </div>;
+    return <div> No posts </div>;
   }
 
   return (
     <div className="posts">
       {posts.length > 1 &&
         posts.map(
-          post => (!post.deleted ? <Post post={post} key={post.id} /> : "")
+          post => (!post.deleted ? <Post post={post} key={post.id} /> : '')
         )}
     </div>
   );

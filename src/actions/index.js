@@ -3,6 +3,7 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 export const ADD_POST = 'ADD_POST',
   GET_CATEGORIES = 'GET_CATEGORIES',
   GET_POSTS = 'GET_POSTS',
+  GET_COMMENTS = 'GET_COMMENTS',
   DELETE_POST = 'DELETE_POST',
   VOTE_POST = 'VOTE_POST';
 
@@ -35,6 +36,17 @@ export const getPosts = () => dispatch =>
 export const receivePosts = posts => ({
   type: GET_POSTS,
   posts
+});
+
+export const getComments = post => dispatch =>
+  ReadableAPI.getComments(post).then(comments => {
+    console.log(comments);
+    dispatch(receiveComments(comments));
+  });
+
+export const receiveComments = comments => ({
+  type: GET_COMMENTS,
+  comments
 });
 
 export const removePost = post => dispatch => {

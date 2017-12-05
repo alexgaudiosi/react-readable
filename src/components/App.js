@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import ListCategories from "./ListCategories";
-import ListPosts from "./ListPosts";
-import NewPost from "./NewPost";
-import { getCategories, getPosts } from "../actions/index";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ListCategories from './ListCategories';
+import ListPosts from './ListPosts';
+import NewPost from './NewPost';
+import { getCategories, getPosts } from '../actions/index';
 // import Post from './Post';
 // import Modal from 'react-modal';
 // import { bindActionCreators } from 'redux';
 // import ReduxThunk from 'redux-thunk';
-import "../App.css";
+import '../App.css';
 
 class App extends Component {
   // openPostModal = ({ title, body, author }) => {
