@@ -52,7 +52,7 @@ function posts(state = initialPostsState, action, comments) {
     case GET_COMMENTS:
       return state.map(
         post =>
-          post.id === action.comments[0].parentId
+          post.parentId && post.id === action.comments[0].parentId
             ? { ...post, comments: action.comments }
             : post
       );

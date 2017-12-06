@@ -4,10 +4,11 @@ import ListComments from './ListComments';
 import { removePost, votePostChange, getComments } from '../actions';
 
 class Post extends Component {
-  handleClick = post => {
-    console.log('click');
-    getComments(post);
-  };
+  componentDidMount() {
+    const post = this.props.post;
+    this.props.getComments(post);
+  }
+
   render() {
     const { post, remove, votePost, comments } = this.props;
 
@@ -30,7 +31,7 @@ class Post extends Component {
           <button onClick={() => votePost(post, 'upVote')}>+</button>
         </div>
         <button onClick={() => this.props.getComments(post)}>comments</button>
-        <ListComments />
+        <ListComments comments={comments} />
         <span>{post.deleted}</span>
       </div>
     );
