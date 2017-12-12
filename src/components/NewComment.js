@@ -29,20 +29,16 @@ const renderField = ({
   </div>
 );
 
-function submit(values, dispatch, parentId) {
+function submit(values, dispatch, postId) {
   values.id = uuid.v4();
   values.timestamp = Date.now();
-  values.parentId = this.props.parentId;
+  values.parentId = postId.modal.post.id;
   return dispatch(submitComment(values));
 }
 
 class NewComment extends Component {
   state = {
     loadingFood: false
-  };
-
-  openCommentsModal = () => {
-    console.log('hey');
   };
 
   closeCommentsModal = () => {
@@ -56,7 +52,9 @@ class NewComment extends Component {
   }
 
   render() {
-    const { pristine, submitting, handleSubmit, parentId, modal } = this.props;
+    const { pristine, submitting, handleSubmit, modal } = this.props;
+    const postId = modal.post.id;
+
     return (
       <Modal
         className="modal"
@@ -67,7 +65,7 @@ class NewComment extends Component {
       >
         <div className="new-comment box-shadow">
           <form
-            onSubmit={handleSubmit(submit, parentId)}
+            onSubmit={handleSubmit(submit, postId)}
             className="new-post__form"
           >
             <Field

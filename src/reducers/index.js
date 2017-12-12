@@ -8,7 +8,8 @@ import {
   DELETE_POST,
   VOTE_POST,
   GET_COMMENTS,
-  OPEN_COMMENTS_MODAL
+  OPEN_COMMENTS_MODAL,
+  ADD_COMMENT
 } from '../actions';
 
 const initialCategoriesState = {
@@ -60,6 +61,13 @@ function posts(state = initialPostsState, action) {
         post =>
           action.comments.length > 0 && post.id === action.comments[0].parentId
             ? { ...post, comments: action.comments }
+            : post
+      );
+    case ADD_COMMENT:
+      return state.map(
+        post =>
+          post.id === action.comment.parentId
+            ? { ...post, comments: post.comments.concat(action.comment) }
             : post
       );
     default:
