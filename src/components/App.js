@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import ListCategories from './ListCategories';
 import ListPosts from './ListPosts';
 import NewPost from './NewPost';
+import NewComment from './NewComment';
 import { getCategories, getPosts } from '../actions/index';
-// import Post from './Post';
 // import Modal from 'react-modal';
-// import { bindActionCreators } from 'redux';
-// import ReduxThunk from 'redux-thunk';
 import '../App.css';
 
 class App extends Component {
@@ -34,13 +32,14 @@ class App extends Component {
   }
 
   render() {
-    const { categories, posts } = this.props;
+    const { categories, posts, modal } = this.props;
     mapDispatchToProps();
     return (
       <div className="App">
         <div className="wrapper">
           <ListCategories categories={categories} />
           <ListPosts posts={posts} />
+          <NewComment modal={modal} />
           <NewPost categories={categories} />
         </div>
       </div>
@@ -48,20 +47,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ categories, posts }) {
+function mapStateToProps({ categories, posts, modal }) {
   return {
     categories: categories,
-    posts: posts
+    posts: posts,
+    modal
   };
 }
-
-// function mapDispatchToProps( dispatch ){
-//   return {
-//     // submitPost: (data) => dispatch(addPost(data))
-//     // categories: (data) => dispatch(getCategories(data))
-
-//   }
-// }
 
 function mapDispatchToProps(dispatch) {
   return {

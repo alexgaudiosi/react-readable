@@ -4,7 +4,7 @@ const headers = {
   Authorization: 'whatever-you-want'
 };
 
-export const create = values => {
+export const createPost = values => {
   return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
@@ -27,6 +27,19 @@ export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data);
+
+export const createComment = values => {
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(values)
+  })
+    .then(res => res.json())
+    .then(data => data);
+};
 
 export const getComments = post => {
   return fetch(`${api}/posts/${post.id}/comments`, { headers })

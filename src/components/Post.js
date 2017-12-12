@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ListComments from './ListComments';
-import { removePost, votePostChange, getComments } from '../actions';
+import {
+  removePost,
+  votePostChange,
+  getComments,
+  submitComment,
+  openCommentsModal
+} from '../actions';
 
 class Post extends Component {
-  componentDidMount() {
-    const post = this.props.post;
-    this.props.getComments(post);
+  componentWillMount() {
+    this.props.getComments(this.props.post);
   }
 
   render() {
-    const { post, remove, votePost, comments } = this.props;
+    const {
+      post,
+      remove,
+      votePost,
+      submitComment,
+      openCommentsModal
+    } = this.props;
 
     return (
       <div className="post box-shadow">
@@ -30,11 +41,14 @@ class Post extends Component {
           <button onClick={() => votePost(post, 'downVote')}>-</button>
           <button onClick={() => votePost(post, 'upVote')}>+</button>
         </div>
-        <button onClick={() => this.props.getComments(post)}>comments</button>
-        <ListComments comments={comments} />
+        <ListComments comments={post.comments} />
+        <button onClick={() => openCommentsModal(post, true)}>
+          Add Comment
+        </button>
         <span>{post.deleted}</span>
       </div>
     );
+    // <NewComment parentId={post.id} />
   }
 }
 
@@ -42,7 +56,10 @@ function mapDispatchToProps(dispatch) {
   return {
     getComments: post => dispatch(getComments(post)),
     remove: post => dispatch(removePost(post)),
-    votePost: (post, vote) => dispatch(votePostChange(post, vote))
+    votePost: (post, vote) => dispatch(votePostChange(post, vote)),
+    openCommentsModal: (post, modalOpen) =>
+      dispatch(openCommentsModal(post, modalOpen))
+    // submitComment: post => dispatch(submitComment(post))
   };
 }
 

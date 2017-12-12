@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { submitPost } from "../actions";
-import { Field, reduxForm } from "redux-form";
-import uuid from "uuid";
+import React, { Component } from 'react';
+import { submitPost } from '../actions';
+import { Field, reduxForm } from 'redux-form';
+import uuid from 'uuid';
 
-const required = value => (value ? undefined : "Required");
+const required = value => (value ? undefined : 'Required');
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength5 = maxLength(15);
+const maxLength15 = maxLength(15);
 
 const renderField = ({
   input,
@@ -47,7 +47,7 @@ class NewPost extends Component {
             type="text"
             placeholder="Title"
             component={renderField}
-            validate={[required, maxLength5]}
+            validate={[required, maxLength15]}
           />
           <Field
             name="body"
@@ -80,6 +80,6 @@ class NewPost extends Component {
 }
 
 export default reduxForm({
-  form: "newPost",
+  form: 'newPost',
   onSubmit: submitPost
 })(NewPost);

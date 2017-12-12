@@ -5,10 +5,12 @@ export const ADD_POST = 'ADD_POST',
   GET_POSTS = 'GET_POSTS',
   GET_COMMENTS = 'GET_COMMENTS',
   DELETE_POST = 'DELETE_POST',
-  VOTE_POST = 'VOTE_POST';
+  VOTE_POST = 'VOTE_POST',
+  ADD_COMMENT = 'ADD_COMMENT',
+  OPEN_COMMENTS_MODAL = 'OPEN_COMMENTS_MODAL';
 
 export const submitPost = values => dispatch => {
-  ReadableAPI.create(values).then(post => dispatch(addPost(post)));
+  ReadableAPI.createPost(values).then(post => dispatch(addPost(post)));
 };
 
 export const addPost = post => {
@@ -38,9 +40,28 @@ export const receivePosts = posts => ({
   posts
 });
 
+export const openCommentsModal = (post, modal) =>
+  openingCommentsModal(post, modal);
+
+export const openingCommentsModal = (post, modal) => ({
+  type: OPEN_COMMENTS_MODAL,
+  post,
+  modal
+});
+
+export const submitComment = values => dispatch => {
+  ReadableAPI.createComment(values).then(comment =>
+    dispatch(addComment(comment))
+  );
+};
+
+export const addComment = comment => ({
+  type: ADD_COMMENT,
+  comment
+});
+
 export const getComments = post => dispatch =>
   ReadableAPI.getComments(post).then(comments => {
-    console.log(comments);
     dispatch(receiveComments(comments));
   });
 

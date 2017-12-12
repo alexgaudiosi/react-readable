@@ -1,9 +1,9 @@
-import React from "react";
-import uuid from "uuid";
+import React from 'react';
+import uuid from 'uuid';
 
 export default function ListCategories({ categories }) {
   if (!categories) {
-    return <div> no data </div>;
+    return <div> No categories </div>;
   }
 
   return (

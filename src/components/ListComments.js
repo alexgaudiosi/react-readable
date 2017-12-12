@@ -2,9 +2,8 @@ import React from 'react';
 import Comment from './Comment';
 
 export default function ListComments({ comments }) {
-  console.log('check');
   if (!comments) {
-    return <div> No comments </div>;
+    return <div className="comments"> No comments </div>;
   }
 
   return (

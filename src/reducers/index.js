@@ -7,7 +7,8 @@ import {
   GET_POSTS,
   DELETE_POST,
   VOTE_POST,
-  GET_COMMENTS
+  GET_COMMENTS,
+  OPEN_COMMENTS_MODAL
 } from '../actions';
 
 const initialCategoriesState = {
@@ -22,6 +23,11 @@ const initialPostsState = {
   ]
 };
 
+const initialModalState = {
+  modalOpen: false,
+  post: {}
+};
+
 function categories(state = initialCategoriesState, action) {
   switch (action.type) {
     case GET_CATEGORIES:
@@ -31,7 +37,7 @@ function categories(state = initialCategoriesState, action) {
   }
 }
 
-function posts(state = initialPostsState, action, comments) {
+function posts(state = initialPostsState, action) {
   switch (action.type) {
     case ADD_POST:
       return [...state, action.post];
@@ -52,11 +58,19 @@ function posts(state = initialPostsState, action, comments) {
     case GET_COMMENTS:
       return state.map(
         post =>
-          post.parentId && post.id === action.comments[0].parentId
+          action.comments.length > 0 && post.id === action.comments[0].parentId
             ? { ...post, comments: action.comments }
             : post
       );
+    default:
+      return state;
+  }
+}
 
+function modal(state = initialModalState, action) {
+  switch (action.type) {
+    case OPEN_COMMENTS_MODAL:
+      return { ...state, modalOpen: action.modal, post: action.post };
     default:
       return state;
   }
@@ -65,5 +79,6 @@ function posts(state = initialPostsState, action, comments) {
 export default combineReducers({
   posts,
   categories,
+  modal,
   form: formReducer
 });
