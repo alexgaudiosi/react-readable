@@ -43,7 +43,12 @@ class Post extends Component {
           <button onClick={() => votePost(post, 'downVote')}>-</button>
           <button onClick={() => votePost(post, 'upVote')}>+</button>
         </div>
-        <ListComments comments={ comments.length > 0 && comments.filter(comment => post.id === comment.parentId) } />
+        <ListComments
+          comments={
+            comments.length > 0 &&
+            comments.filter(comment => post.id === comment.parentId)
+          }
+        />
         <button onClick={() => openCommentsModal(post, true)}>
           Add Comment
         </button>

@@ -63,27 +63,22 @@ function posts(state = initialPostsState, action) {
 }
 function comments(state = initialCommentsState, action) {
   switch (action.type) {
-  case GET_COMMENTS:
-    return [...action.comments];
+    case GET_COMMENTS:
+      return [...action.comments];
 
-  case ADD_COMMENT:
-    return state.map(
-      post =>
-        post.id === action.comment.parentId
-          ? { ...post, comments: post.comments.concat(action.comment) }
-          : post
-    );
+    case ADD_COMMENT:
+      return [...state, action.comment];
 
-  case DELETE_COMMENT:
-    console.log(action.comment.deleted);
-    console.log(state);
+    case DELETE_COMMENT:
+      return state.map(
+        comment =>
+          comment.id === action.comment.id
+            ? { ...comment, deleted: action.comment.deleted }
+            : comment
+      );
 
-    state.filter(post => post.id === action.comment.parentId).map(
-      c => (c.id === action.comment.id ? { deleted: true } : c)
-    );
-
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 

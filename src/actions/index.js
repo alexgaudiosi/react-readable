@@ -72,9 +72,9 @@ export const receiveComments = comments => ({
 });
 
 export const removeComment = comment => dispatch => {
-  // ReadableAPI.deleteComment(comment).then(comment =>
-  dispatch(deleteComment(comment));
-  // );
+  ReadableAPI.deleteComment(comment).then(comment =>
+    dispatch(deleteComment(comment))
+  );
 };
 
 export const deleteComment = comment => ({
