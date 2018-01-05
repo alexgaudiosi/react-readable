@@ -9,7 +9,8 @@ import {
   VOTE_POST,
   GET_COMMENTS,
   OPEN_COMMENTS_MODAL,
-  ADD_COMMENT
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from '../actions';
 
 const initialCategoriesState = {
@@ -17,11 +18,11 @@ const initialCategoriesState = {
 };
 
 const initialPostsState = {
-  posts: [
-    {
-      comments: []
-    }
-  ]
+  posts: []
+};
+
+const initialCommentsState = {
+  comments: []
 };
 
 const initialModalState = {
@@ -56,22 +57,33 @@ function posts(state = initialPostsState, action) {
             ? { ...p, voteScore: action.post.voteScore }
             : p
       );
-    case GET_COMMENTS:
-      return state.map(
-        post =>
-          action.comments.length > 0 && post.id === action.comments[0].parentId
-            ? { ...post, comments: action.comments }
-            : post
-      );
-    case ADD_COMMENT:
-      return state.map(
-        post =>
-          post.id === action.comment.parentId
-            ? { ...post, comments: post.comments.concat(action.comment) }
-            : post
-      );
     default:
       return state;
+  }
+}
+function comments(state = initialCommentsState, action) {
+  switch (action.type) {
+  case GET_COMMENTS:
+    return [...action.comments];
+
+  case ADD_COMMENT:
+    return state.map(
+      post =>
+        post.id === action.comment.parentId
+          ? { ...post, comments: post.comments.concat(action.comment) }
+          : post
+    );
+
+  case DELETE_COMMENT:
+    console.log(action.comment.deleted);
+    console.log(state);
+
+    state.filter(post => post.id === action.comment.parentId).map(
+      c => (c.id === action.comment.id ? { deleted: true } : c)
+    );
+
+  default:
+    return state;
   }
 }
 
@@ -87,6 +99,7 @@ function modal(state = initialModalState, action) {
 export default combineReducers({
   posts,
   categories,
+  comments,
   modal,
   form: formReducer
 });

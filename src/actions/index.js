@@ -7,7 +7,8 @@ export const ADD_POST = 'ADD_POST',
   DELETE_POST = 'DELETE_POST',
   VOTE_POST = 'VOTE_POST',
   ADD_COMMENT = 'ADD_COMMENT',
-  OPEN_COMMENTS_MODAL = 'OPEN_COMMENTS_MODAL';
+  OPEN_COMMENTS_MODAL = 'OPEN_COMMENTS_MODAL',
+  DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const submitPost = values => dispatch => {
   ReadableAPI.createPost(values).then(post => dispatch(addPost(post)));
@@ -68,6 +69,17 @@ export const getComments = post => dispatch =>
 export const receiveComments = comments => ({
   type: GET_COMMENTS,
   comments
+});
+
+export const removeComment = comment => dispatch => {
+  // ReadableAPI.deleteComment(comment).then(comment =>
+  dispatch(deleteComment(comment));
+  // );
+};
+
+export const deleteComment = comment => ({
+  type: DELETE_COMMENT,
+  comment
 });
 
 export const removePost = post => dispatch => {

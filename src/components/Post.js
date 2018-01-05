@@ -17,11 +17,13 @@ class Post extends Component {
   render() {
     const {
       post,
+      comments,
       remove,
       votePost,
       submitComment,
       openCommentsModal
     } = this.props;
+    const { postComments } = {};
 
     return (
       <div className="post box-shadow">
@@ -41,7 +43,7 @@ class Post extends Component {
           <button onClick={() => votePost(post, 'downVote')}>-</button>
           <button onClick={() => votePost(post, 'upVote')}>+</button>
         </div>
-        <ListComments comments={post.comments} />
+        <ListComments comments={ comments.length > 0 && comments.filter(comment => post.id === comment.parentId) } />
         <button onClick={() => openCommentsModal(post, true)}>
           Add Comment
         </button>
@@ -50,6 +52,12 @@ class Post extends Component {
     );
     // <NewComment parentId={post.id} />
   }
+}
+
+function mapStateToProps({ comments }) {
+  return {
+    comments: comments
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -63,4 +71,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

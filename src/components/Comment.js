@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { removeComment } from '../actions';
 
 class Comment extends Component {
   render() {
-    const { comment } = this.props;
+    const { comment, removeComment } = this.props;
 
     return (
       <div className="comment box-shadow">
         <button
           data-id={comment.id}
-          //onClick={() => remove(comment)}
+          onClick={() => removeComment(comment)}
           className="comment__delete"
         >
           x
@@ -28,7 +29,9 @@ class Comment extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    removeComment: comment => dispatch(removeComment(comment))
+  };
 }
 
 export default connect(null, mapDispatchToProps)(Comment);
