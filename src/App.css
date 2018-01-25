@@ -64,6 +64,11 @@ body {
   right: 10px;
 }
 
+.comments {
+  padding: 10px 0;
+  color: #666;
+}
+
 .comment {
   margin: 20px 0;
   padding: 10px;

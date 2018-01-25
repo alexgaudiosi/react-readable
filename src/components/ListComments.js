@@ -1,22 +1,46 @@
-import React from 'react';
-import Comment from './Comment';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Comment from './Comment'
+import { getComments } from '../actions'
 
-export default function ListComments({ comments }) {
-  if (!comments) {
-    return <div className="comments"> No comments </div>;
+class ListComments extends Component {
+  componentWillMount() {
+    this.props.getComments(this.props.post.id)
   }
 
-  return (
-    <div className="comments">
-      {comments.length > 1 &&
-        comments.map(
-          comment =>
-            !comment.deleted ? (
-              <Comment comment={comment} key={comment.id} />
-            ) : (
-              ''
-            )
-        )}
-    </div>
-  );
+  render() {
+    const { post, comments } = this.props
+
+    if (!comments) {
+      return <div className="comments"> No comments </div>
+    }
+
+    return (
+      <div className="comments">
+        {comments.length > 0 &&
+          comments.map(
+            comment =>
+              !comment.deleted && post.id === comment.parentId ? (
+                <Comment comment={comment} key={comment.id} />
+              ) : (
+                ''
+              )
+          )}
+      </div>
+    )
+  }
 }
+
+function mapStateToProps({ comments }) {
+  return {
+    comments: comments
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getComments: post => dispatch(getComments(post))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListComments)

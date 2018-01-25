@@ -1,8 +1,8 @@
-const api = 'http://localhost:5001';
+const api = 'http://localhost:5001'
 
 const headers = {
   Authorization: 'whatever-you-want'
-};
+}
 
 export const createPost = values => {
   return fetch(`${api}/posts`, {
@@ -14,19 +14,19 @@ export const createPost = values => {
     body: JSON.stringify(values)
   })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}
 
 export const fetchCategories = () => {
   return fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => data.categories);
-};
+    .then(data => data.categories)
+}
 
 export const fetchPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
-    .then(data => data);
+    .then(data => data)
 
 export const createComment = values => {
   return fetch(`${api}/comments`, {
@@ -38,14 +38,14 @@ export const createComment = values => {
     body: JSON.stringify(values)
   })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}
 
 export const getComments = post => {
-  return fetch(`${api}/posts/${post.id}/comments`, { headers })
+  return fetch(`${api}/posts/${post}/comments`, { headers })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}
 
 export const deleteComment = comment => {
   return fetch(`${api}/comments/${comment.id}`, {
@@ -53,8 +53,8 @@ export const deleteComment = comment => {
     headers
   })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}
 
 export const deletePost = post => {
   return fetch(`${api}/posts/${post.id}`, {
@@ -62,8 +62,8 @@ export const deletePost = post => {
     headers
   })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}
 
 export const votePost = (post, vote) => {
   return fetch(`${api}/posts/${post.id}`, {
@@ -75,5 +75,5 @@ export const votePost = (post, vote) => {
     body: JSON.stringify({ option: vote })
   })
     .then(res => res.json())
-    .then(data => data);
-};
+    .then(data => data)
+}

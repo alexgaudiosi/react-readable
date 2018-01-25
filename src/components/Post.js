@@ -1,30 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ListComments from './ListComments';
-import {
-  removePost,
-  votePostChange,
-  getComments,
-  submitComment,
-  openCommentsModal
-} from '../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import ListComments from './ListComments'
+import { removePost, votePostChange, openCommentsModal } from '../actions'
 
 class Post extends Component {
-  componentWillMount() {
-    this.props.getComments(this.props.post);
-  }
-
   render() {
-    const {
-      post,
-      comments,
-      remove,
-      votePost,
-      submitComment,
-      openCommentsModal
-    } = this.props;
-    const { postComments } = {};
-
+    const { post, remove, votePost, openCommentsModal } = this.props
+    // console.log(this.props.comments)
     return (
       <div className="post box-shadow">
         <button
@@ -37,43 +19,30 @@ class Post extends Component {
         <h3>{post.title}</h3>
         <p className="copy">{post.body}</p>
         <p className="copy">{post.category}</p>
+        <p className="copy">{post.id}</p>
         <p className="copy--small">Author: {post.author}</p>
         <div className="post__vote">
           <p className="copy--small">Score: {post.voteScore}</p>
           <button onClick={() => votePost(post, 'downVote')}>-</button>
           <button onClick={() => votePost(post, 'upVote')}>+</button>
         </div>
-        <ListComments
-          comments={
-            comments.length > 0 &&
-            comments.filter(comment => post.id === comment.parentId)
-          }
-        />
+        <ListComments post={post} />
         <button onClick={() => openCommentsModal(post, true)}>
           Add Comment
         </button>
         <span>{post.deleted}</span>
       </div>
-    );
-    // <NewComment parentId={post.id} />
+    )
   }
-}
-
-function mapStateToProps({ comments }) {
-  return {
-    comments: comments
-  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getComments: post => dispatch(getComments(post)),
     remove: post => dispatch(removePost(post)),
     votePost: (post, vote) => dispatch(votePostChange(post, vote)),
     openCommentsModal: (post, modalOpen) =>
       dispatch(openCommentsModal(post, modalOpen))
-    // submitComment: post => dispatch(submitComment(post))
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(null, mapDispatchToProps)(Post)

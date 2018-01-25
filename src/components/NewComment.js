@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { submitComment } from '../actions';
-import { Field, reduxForm } from 'redux-form';
-import Loading from 'react-loading';
-import Modal from 'react-modal';
-import uuid from 'uuid';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { submitComment } from '../actions'
+import { Field, reduxForm } from 'redux-form'
+import Modal from 'react-modal'
+import uuid from 'uuid'
 
-const required = value => (value ? undefined : 'Required');
+const required = value => (value ? undefined : 'Required')
 const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
+  value && value.length > max ? `Must be ${max} characters or less` : undefined
+const maxLength15 = maxLength(15)
 
 const renderField = ({
   input,
@@ -27,33 +26,33 @@ const renderField = ({
           )))}
     </div>
   </div>
-);
+)
 
 function submit(values, dispatch, postId) {
-  values.id = uuid.v4();
-  values.timestamp = Date.now();
-  values.parentId = postId.modal.post.id;
-  return dispatch(submitComment(values));
+  values.id = uuid.v4()
+  values.timestamp = Date.now()
+  values.parentId = postId.modal.post.id
+  return dispatch(submitComment(values))
 }
 
 class NewComment extends Component {
   state = {
     loadingFood: false
-  };
+  }
 
   closeCommentsModal = () => {
     this.setState(() => ({
       commentsModalOpen: false
-    }));
-  };
+    }))
+  }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
   }
 
   render() {
-    const { pristine, submitting, handleSubmit, modal } = this.props;
-    const postId = modal.post.id;
+    const { pristine, submitting, handleSubmit, modal } = this.props
+    const postId = modal.post.id
 
     return (
       <Modal
@@ -88,17 +87,17 @@ class NewComment extends Component {
           </form>
         </div>
       </Modal>
-    );
+    )
   }
 }
 
 function mapStateToProps({ modal }) {
-  return { modal: modal };
+  return { modal: modal }
 }
 
-NewComment = connect(mapStateToProps, null)(NewComment);
+NewComment = connect(mapStateToProps, null)(NewComment)
 
 export default reduxForm({
   form: 'newComment',
   onSubmit: submitComment
-})(NewComment);
+})(NewComment)

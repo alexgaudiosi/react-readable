@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { submitPost } from '../actions';
-import { Field, reduxForm } from 'redux-form';
-import uuid from 'uuid';
+import React, { Component } from 'react'
+import { submitPost } from '../actions'
+import { Field, reduxForm } from 'redux-form'
+import uuid from 'uuid'
 
-const required = value => (value ? undefined : 'Required');
+const required = value => (value ? undefined : 'Required')
 const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
+  value && value.length > max ? `Must be ${max} characters or less` : undefined
+const maxLength15 = maxLength(15)
 
 const renderField = ({
   input,
@@ -24,21 +24,21 @@ const renderField = ({
           )))}
     </div>
   </div>
-);
+)
 
 function submit(values, dispatch) {
-  values.id = uuid.v4();
-  values.timestamp = Date.now();
-  return dispatch(submitPost(values));
+  values.id = uuid.v4()
+  values.timestamp = Date.now()
+  return dispatch(submitPost(values))
 }
 
 class NewPost extends Component {
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
   }
 
   render() {
-    const { categories, pristine, submitting, handleSubmit } = this.props;
+    const { categories, pristine, submitting, handleSubmit } = this.props
     return (
       <div className="new-post box-shadow">
         <form onSubmit={handleSubmit(submit)} className="new-post__form">
@@ -75,11 +75,11 @@ class NewPost extends Component {
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
 
 export default reduxForm({
   form: 'newPost',
   onSubmit: submitPost
-})(NewPost);
+})(NewPost)
