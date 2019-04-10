@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { submitComment } from '../actions'
+import { submitComment, closeCommentsModal } from '../actions'
 import { Field, reduxForm } from 'redux-form'
 import Modal from 'react-modal'
 import uuid from 'uuid'
@@ -40,18 +40,24 @@ class NewComment extends Component {
     loadingFood: false
   }
 
-  closeCommentsModal = () => {
-    this.setState(() => ({
-      commentsModalOpen: false
-    }))
-  }
+  // closeCommentsModal = () => {
+  //   this.setState(() => ({
+  //     commentsModalOpen: false
+  //   }))
+  // }
 
   handleSubmit(e) {
     e.preventDefault()
   }
 
   render() {
-    const { pristine, submitting, handleSubmit, modal } = this.props
+    const {
+      pristine,
+      submitting,
+      handleSubmit,
+      modal,
+      closeCommentsModal
+    } = this.props
     const postId = modal.post.id
 
     return (
@@ -59,10 +65,11 @@ class NewComment extends Component {
         className="modal"
         overlayClassName="overlay"
         isOpen={modal.modalOpen}
-        onRequestClose={this.closeCommentsModal}
+        // onRequestClose={this.closeCommentsModal(false)}
         contentLabel="Modal"
       >
         <div className="new-comment box-shadow">
+          <button onClick={closeCommentsModal(false)}>x</button>
           <form
             onSubmit={handleSubmit(submit, postId)}
             className="new-post__form"
@@ -95,7 +102,11 @@ function mapStateToProps({ modal }) {
   return { modal: modal }
 }
 
-NewComment = connect(mapStateToProps, null)(NewComment)
+function mapDispatchToProps(dispatch) {
+  closeCommentsModal: modalOpen => dispatch(closeCommentsModal(modalOpen))
+}
+
+NewComment = connect(mapStateToProps, mapDispatchToProps)(NewComment)
 
 export default reduxForm({
   form: 'newComment',

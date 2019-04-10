@@ -6,7 +6,6 @@ import { removePost, votePostChange, openCommentsModal } from '../actions'
 class Post extends Component {
   render() {
     const { post, remove, votePost, openCommentsModal } = this.props
-    // console.log(this.props.comments)
     return (
       <div className="post box-shadow">
         <button

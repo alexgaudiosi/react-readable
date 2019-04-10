@@ -9,6 +9,7 @@ import {
   VOTE_POST,
   GET_COMMENTS,
   OPEN_COMMENTS_MODAL,
+  CLOSE_COMMENTS_MODAL,
   ADD_COMMENT,
   DELETE_COMMENT
 } from '../actions'
@@ -86,6 +87,8 @@ function modal(state = initialModalState, action) {
   switch (action.type) {
     case OPEN_COMMENTS_MODAL:
       return { ...state, modalOpen: action.modal, post: action.post }
+    case CLOSE_COMMENTS_MODAL:
+      return { ...state, modalOpen: action.modal, post: null }
     default:
       return state
   }

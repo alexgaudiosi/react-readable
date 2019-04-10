@@ -8,6 +8,7 @@ export const ADD_POST = 'ADD_POST',
   VOTE_POST = 'VOTE_POST',
   ADD_COMMENT = 'ADD_COMMENT',
   OPEN_COMMENTS_MODAL = 'OPEN_COMMENTS_MODAL',
+  CLOSE_COMMENTS_MODAL = 'CLOSE_COMMENTS_MODAL',
   DELETE_COMMENT = 'DELETE_COMMENT'
 
 export const submitPost = values => dispatch => {
@@ -47,6 +48,13 @@ export const openCommentsModal = (post, modal) =>
 export const openingCommentsModal = (post, modal) => ({
   type: OPEN_COMMENTS_MODAL,
   post,
+  modal
+})
+
+export const closeCommentsModal = modal => closingCommentsModal(modal)
+
+export const closingCommentsModal = modal => ({
+  type: CLOSE_COMMENTS_MODAL,
   modal
 })
 
